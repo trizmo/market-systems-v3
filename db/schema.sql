@@ -9,9 +9,12 @@ USE market_systems_db;
 -- Users should be able to READ/UPDATE their own data and DELETE their account.
 CREATE TABLE users (
 	id INT UNSIGNED AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL DEFAULT ""
   email VARCHAR(100) NOT NULL DEFAULT "",
-  user_pass VARCHAR(255) NOT NULL DEFAULT "$2a$10$4OG93bFxzLt.KxTizKzqOeveILGr9fe3/JOB0o3rNDU/xE0yCOxvq",
-  PRIMARY KEY (userID)
+  password VARCHAR(255) NOT NULL DEFAULT "$2a$10$4OG93bFxzLt.KxTizKzqOeveILGr9fe3/JOB0o3rNDU/xE0yCOxvq",
+  createdAt,
+  updatedAt,
+  PRIMARY KEY (id)
 );
 
 -- This table references each alert from the user.

@@ -3,7 +3,7 @@ var db  = require('../models');
 exports.index = function(req, res) {
   db.Alert.findAll({
     where: {
-      UserId: req.user.id
+      username: req.body.username
     }
   }).then(function(dbAlert) {
     console.log(dbAlert);

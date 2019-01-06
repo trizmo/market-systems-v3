@@ -1,8 +1,16 @@
-var express = require("express");
-var router = express.Router();
+var express = require('express');
+var router  = express.Router();
 
-var users_controller = require("../controllers/users_controller");
+var passport = require("../config/passport");
+var users_controller = require('../controllers/users_controller');
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
-router.get("/", users_controller.index);
+router.get('/signup', users_controller.registrationPage);
 
-module.exports = router; 
+router.get('/sign-out', users_controller.signOutUser);
+
+router.post('/login', passport.authenticate("local"), users_controller.loginUser);
+
+router.post('/signup', users_controller.signUpUser);
+
+module.exports = router;

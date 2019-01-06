@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
+const bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require("./config/passport");
 
@@ -43,6 +44,10 @@ app.set("view engine", "handlebars");
 
 // For logging / debugging use:
 app.use(logger('dev'));
+
+// Body parsing - i think this is for req.body
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Express static / public pages: setup
 app.use(express.static(path.join(__dirname, "public")))
