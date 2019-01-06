@@ -12,20 +12,22 @@ CREATE TABLE users (
   username VARCHAR(255) NOT NULL DEFAULT "",
   email VARCHAR(100) NOT NULL DEFAULT "",
   password VARCHAR(255) NOT NULL DEFAULT "$2a$10$4OG93bFxzLt.KxTizKzqOeveILGr9fe3/JOB0o3rNDU/xE0yCOxvq",
-  createdAt,
-  updatedAt,
+  createdAt VARCHAR(100) NOT NULL DEFAULT "",
+  updatedAt VARCHAR(100) NOT NULL DEFAULT "",
   PRIMARY KEY (id)
 );
 
 -- This table references each alert from the user.
 -- Users will have full CRUD operations for their alerts
-CREATE TABLE users_alerts (
-	aid INT UNSIGNED AUTO_INCREMENT,
+CREATE TABLE alerts (
+	id INT UNSIGNED AUTO_INCREMENT,
   symbol VARCHAR(255) NOT NULL DEFAULT "",
-  target_price INT NOT NULL DEFAULT "",
-  deviceID VARCHAR(45) NOT NULL DEFAULT "",
-  switch VARCHAR(2) DEFAULT "0", -- This is the value that will be referenced to allow multiple users to open doors or turn on our test/dev LED.
-  PRIMARY KEY (gateID)
+  target_price INT NOT NULL DEFAULT "0",
+  createdAt VARCHAR(100) NOT NULL DEFAULT "",
+  updatedAt VARCHAR(100) NOT NULL DEFAULT "",
+  userID INT NOT NULL DEFAULT "0",
+  PRIMARY KEY (id),
+  FOREIGN KEY (id) REFERENCES users(id)
 );
     
 -- This table references individual details related to a specific user.
