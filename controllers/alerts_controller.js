@@ -1,9 +1,11 @@
 var db  = require('../models');
 
 exports.index = function(req, res) {
+  console.log("alerts_controller.index req.user.id: ")
+  console.log(req.user.id)
   db.Alert.findAll({
     where: {
-      username: req.body.username
+      UserId: req.user.id
     }
   }).then(function(dbAlert) {
     console.log(dbAlert);
@@ -14,13 +16,13 @@ exports.index = function(req, res) {
   });
 };
 
-// exports.createAlert = function(req, res) {
+exports.createAlert = function(req, res) {
+  console.log("createAlert req.user: ")
+  console.log(req.user);
+  // Add id from User onto req.body
+  req.body.UserId = req.user.id;
 
-//   console.log(req.user);
-//   // Add id from User onto req.body
-//   req.body.UserId = req.user.id;
-
-//   db.Trip.create(req.body).then(function(dbPost) {
-//     res.json(dbPost);
-//   });
-// };
+  db.Alert.create(req.body).then(function(dbPost) {
+    res.json(dbPost);
+  });
+};
