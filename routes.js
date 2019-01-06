@@ -5,6 +5,6 @@ module.exports = function(app){
 
   app.use("/", application)
   // app.use("/users", users)
-  // app.use("/alerts", alerts)
+  app.use("/alerts", alerts)
 
 }
