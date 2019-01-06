@@ -1,4 +1,4 @@
-var symbolInput = $("#alertName"),
+var symbolInput = $("#symbolName"),
 		target_priceInput = $("#target_price")
 
 var url = window.location.search;
