@@ -20,14 +20,15 @@ CREATE TABLE users (
 -- This table references each alert from the user.
 -- Users will have full CRUD operations for their alerts
 CREATE TABLE alerts (
-  AlertID INT UNSIGNED AUTO_INCREMENT,
+  id INT UNSIGNED AUTO_INCREMENT,
   symbol VARCHAR(255) NOT NULL DEFAULT "",
-  target_price INT NOT NULL DEFAULT "0",
+  target_price DECIMAL(5,2) NOT NULL,
+  current_price DECIMAL(5,2) NOT NULL DEFAULT "0.01",
   createdAt VARCHAR(100) NOT NULL DEFAULT "",
   updatedAt VARCHAR(100) NOT NULL DEFAULT "",
-  UserID INT,
-  PRIMARY KEY (AlertID),
-  FOREIGN KEY (UserID) REFERENCES users(UserID)
+  UserId INT UNSIGNED,
+  PRIMARY KEY (id),
+  FOREIGN KEY (UserId) REFERENCES users(id)
 )
 
 ENGINE = InnoDB;
