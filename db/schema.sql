@@ -8,22 +8,30 @@ USE market_systems_db;
 -- This table references all individuals registered to a device or devices.
 -- Users should be able to READ/UPDATE their own data and DELETE their account.
 CREATE TABLE users (
-	id INT UNSIGNED AUTO_INCREMENT,
+	UserID INT UNSIGNED AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL DEFAULT "",
   email VARCHAR(100) NOT NULL DEFAULT "",
-  user_pass VARCHAR(255) NOT NULL DEFAULT "$2a$10$4OG93bFxzLt.KxTizKzqOeveILGr9fe3/JOB0o3rNDU/xE0yCOxvq",
-  PRIMARY KEY (userID)
+  password VARCHAR(255) NOT NULL DEFAULT "$2a$10$4OG93bFxzLt.KxTizKzqOeveILGr9fe3/JOB0o3rNDU/xE0yCOxvq",
+  createdAt VARCHAR(100) NOT NULL DEFAULT "",
+  updatedAt VARCHAR(100) NOT NULL DEFAULT "",
+  PRIMARY KEY (id)
 );
 
 -- This table references each alert from the user.
 -- Users will have full CRUD operations for their alerts
-CREATE TABLE users_alerts (
-	aid INT UNSIGNED AUTO_INCREMENT,
+CREATE TABLE alerts (
+  id INT UNSIGNED AUTO_INCREMENT,
   symbol VARCHAR(255) NOT NULL DEFAULT "",
-  target_price INT NOT NULL DEFAULT "",
-  deviceID VARCHAR(45) NOT NULL DEFAULT "",
-  switch VARCHAR(2) DEFAULT "0", -- This is the value that will be referenced to allow multiple users to open doors or turn on our test/dev LED.
-  PRIMARY KEY (gateID)
-);
+  target_price DECIMAL(5,2) NOT NULL,
+  current_price DECIMAL(5,2) NOT NULL DEFAULT "0.01",
+  createdAt VARCHAR(100) NOT NULL DEFAULT "",
+  updatedAt VARCHAR(100) NOT NULL DEFAULT "",
+  UserId INT UNSIGNED,
+  PRIMARY KEY (id),
+  FOREIGN KEY (UserId) REFERENCES users(id)
+)
+
+ENGINE = InnoDB;
     
 -- This table references individual details related to a specific user.
 -- This is where we will store the user data for facial recognition.

@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/assets/css/alerts.css">
+{{> nav }}
+{{> login-modal }}
+{{> new-alert-modal }}
+<div class="all-trips-container container">
+	
+	<div class="row">
+		{{#if alert }}
+		{{#each alert}}
+
+            <li>
+                <strong>AlertID: #{{id}}</strong> <br>
+                Symbol: {{symbol}} <br>
+                Target Price: {{target_price}} <br>
+                Current Price: {{current_price}} <br>
+                createdAt: {{createdAt}} <br>
+                updatedAt: {{updatedAt}} <br>
+                UserID: {{UserId}} <br>
+                <br><br>
+
+		{{/each}}
+		{{/if}}
+	<button id="add-trip-button" data-toggle="modal" data-target="#squarespaceModal" type="button" class="btn btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
+	</div>
+</div>
