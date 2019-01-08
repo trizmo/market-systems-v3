@@ -4,6 +4,7 @@ const logger = require("morgan");
 const bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require("./config/passport");
+const db = require("../models");
 
 
 // Selecting the port for server
@@ -14,7 +15,7 @@ const app = express();
 
 // Setting Authorization
 const isAuth = require("./config/middleware/isAuthenticated");
-const authCheck  = require("./config/middleware/attachAuthenticationStatus");
+const authCheck = require("./config/middleware/attachAuthenticationStatus");
 
 // Allow sessions
 // Kicks user out after 10minutes (comment out cookie to turn off)
@@ -54,9 +55,14 @@ app.use(express.static(path.join(__dirname, "public")))
 
 require('./routes')(app);
 
-// Starting server and displaying location and port
-app.listen(PORT, function(){
-  console.log("Server listening on http://localhost:" + PORT)
-})
+
+db.sequelize.sync().then(function () {
+
+  // Starting server and displaying location and port
+  app.listen(PORT, function () {
+    console.log("Server listening on http://localhost:" + PORT)
+  });
+
+});
 
 module.exports = app;
