@@ -4,7 +4,7 @@ const logger = require("morgan");
 const bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require("./config/passport");
-const db = require("../models");
+const db = require("./models");
 
 
 // Selecting the port for server
